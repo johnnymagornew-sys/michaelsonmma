@@ -153,21 +153,50 @@
   <div class="absolute bottom-0 left-0 right-0" style="border-top:1px solid rgba(255,255,255,.05);background:rgba(0,0,0,.65);backdrop-filter:blur(10px)">
     <div class="max-w-7xl mx-auto px-8 grid grid-cols-2 md:grid-cols-4">
       <div class="py-5 md:py-8 px-4 md:px-6 text-center" style="border-left:1px solid rgba(255,255,255,.05)">
-        <div class="font-headline font-black text-3xl md:text-5xl text-primary">+16</div>
+        <div class="font-headline font-black text-3xl md:text-5xl text-primary stat-num" data-target="16" data-prefix="+">+0</div>
         <div class="font-headline font-bold text-[9px] md:text-[10px] tracking-[.2em] md:tracking-[.3em] uppercase text-white/40 mt-1">שנות ניסיון</div>
       </div>
       <div class="py-5 md:py-8 px-4 md:px-6 text-center" style="border-left:1px solid rgba(255,255,255,.05)">
-        <div class="font-headline font-black text-3xl md:text-5xl text-white">+1,000</div>
+        <div class="font-headline font-black text-3xl md:text-5xl text-white stat-num" data-target="1000" data-prefix="+" data-separator=",">+0</div>
         <div class="font-headline font-bold text-[9px] md:text-[10px] tracking-[.2em] md:tracking-[.3em] uppercase text-white/40 mt-1">לוחמים שאומנו</div>
       </div>
       <div class="py-5 md:py-8 px-4 md:px-6 text-center" style="border-left:1px solid rgba(255,255,255,.05)">
-        <div class="font-headline font-black text-3xl md:text-5xl text-primary">+40</div>
+        <div class="font-headline font-black text-3xl md:text-5xl text-primary stat-num" data-target="40" data-prefix="+">+0</div>
         <div class="font-headline font-bold text-[9px] md:text-[10px] tracking-[.2em] md:tracking-[.3em] uppercase text-white/40 mt-1">מדליות</div>
       </div>
       <div class="py-5 md:py-8 px-4 md:px-6 text-center">
-        <div class="font-headline font-black text-3xl md:text-5xl text-white">3</div>
+        <div class="font-headline font-black text-3xl md:text-5xl text-white stat-num" data-target="3">0</div>
         <div class="font-headline font-bold text-[9px] md:text-[10px] tracking-[.2em] md:tracking-[.3em] uppercase text-white/40 mt-1">מאמנים מובילים</div>
       </div>
+      <script>
+      (function(){
+        var els = document.querySelectorAll('.stat-num');
+        var done = false;
+        function formatNum(n, sep){ return sep ? n.toLocaleString('en-US') : String(n); }
+        function runCounters(){
+          if(done) return; done = true;
+          els.forEach(function(el){
+            var target = parseInt(el.dataset.target);
+            var prefix = el.dataset.prefix || '';
+            var sep = el.dataset.separator || '';
+            var duration = 1800;
+            var steps = 60;
+            var interval = duration / steps;
+            var step = 0;
+            var timer = setInterval(function(){
+              step++;
+              var val = Math.round(target * (step/steps));
+              el.textContent = prefix + formatNum(val, sep);
+              if(step >= steps){ el.textContent = prefix + formatNum(target, sep); clearInterval(timer); }
+            }, interval);
+          });
+        }
+        var observer = new IntersectionObserver(function(entries){
+          if(entries[0].isIntersecting) runCounters();
+        }, {threshold: 0.3});
+        observer.observe(els[0].closest('.grid'));
+      })();
+      </script>
     </div>
   </div>
 </header>
