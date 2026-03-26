@@ -112,9 +112,9 @@
 <header class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black" id="home">
   <div class="absolute inset-0 z-0">
     <!-- Video background -->
-    <video autoplay muted loop playsinline
+    <video autoplay muted loop playsinline preload="auto"
       class="w-full h-full object-cover opacity-60"
-      style="filter:grayscale(60%) contrast(1.1)">
+      style="filter:grayscale(60%) contrast(1.1);will-change:transform;transform:translateZ(0)">
       <source src="./back_scene.mp4" type="video/mp4"/>
     </video>
     <!-- Inward vignette: fades all 4 edges into black -->
@@ -172,24 +172,26 @@
       (function(){
         var els = document.querySelectorAll('.stat-num');
         var done = false;
+        function easeOutExpo(t){ return t===1 ? 1 : 1 - Math.pow(2, -10*t); }
         function formatNum(n, sep){ return sep ? n.toLocaleString('en-US') : String(n); }
+        function animateCounter(el){
+          var target = parseInt(el.dataset.target);
+          var prefix = el.dataset.prefix || '';
+          var sep = el.dataset.separator || '';
+          var duration = 1600;
+          var start = null;
+          function frame(ts){
+            if(!start) start = ts;
+            var progress = Math.min((ts - start) / duration, 1);
+            var val = Math.round(easeOutExpo(progress) * target);
+            el.textContent = prefix + formatNum(val, sep);
+            if(progress < 1) requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        }
         function runCounters(){
           if(done) return; done = true;
-          els.forEach(function(el){
-            var target = parseInt(el.dataset.target);
-            var prefix = el.dataset.prefix || '';
-            var sep = el.dataset.separator || '';
-            var duration = 1800;
-            var steps = 60;
-            var interval = duration / steps;
-            var step = 0;
-            var timer = setInterval(function(){
-              step++;
-              var val = Math.round(target * (step/steps));
-              el.textContent = prefix + formatNum(val, sep);
-              if(step >= steps){ el.textContent = prefix + formatNum(target, sep); clearInterval(timer); }
-            }, interval);
-          });
+          els.forEach(animateCounter);
         }
         var observer = new IntersectionObserver(function(entries){
           if(entries[0].isIntersecting) runCounters();
