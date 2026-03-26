@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>מיקלסון MMA | הזירה מחכה</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#E21B1B",
+            "primary-container": "#930007",
+            "on-primary": "#ffffff",
+            "background": "#131313",
+            "surface": "#131313",
+            "surface-container-lowest": "#0e0e0e",
+            "surface-container-low": "#111111",
+            "surface-container": "#1a1a1a",
+            "surface-container-high": "#2a2a2a",
+            "surface-container-highest": "#333333",
+            "on-surface": "#ffffff",
+            "outline-variant": "#5d3f3b",
+            "error": "#ffb4ab",
+            "error-container": "#93000a",
+          },
+          fontFamily: {
+            "headline": ["Space Grotesk", "sans-serif"],
+            "body": ["Manrope", "sans-serif"],
+          },
+          borderRadius: {
+            "DEFAULT": "0px", "sm": "0px", "md": "0px",
+            "lg": "0px", "xl": "0px", "2xl": "0px", "full": "9999px",
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+    ::-webkit-scrollbar{width:8px}
+    ::-webkit-scrollbar-track{background:#131313}
+    ::-webkit-scrollbar-thumb{background:#2a2a2a}
+    ::-webkit-scrollbar-thumb:hover{background:#E21B1B}
+    body{background:#131313;color:#fff;font-family:'Manrope',sans-serif}
+    .glow-red{text-shadow:0 0 30px rgba(226,27,27,.5),0 0 60px rgba(226,27,27,.2)}
+    .tight{letter-spacing:-0.04em}
+    .bg-gritty{background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.04}
+    .vert{writing-mode:vertical-rl;text-orientation:mixed}
+    @keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(50%)}}
+    .marquee{animation:mq 30s linear infinite}
+    @keyframes up{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
+    .reveal{animation:up .9s cubic-bezier(.16,1,.3,1) both}
+    .d1{animation-delay:.1s}.d2{animation-delay:.25s}.d3{animation-delay:.4s}
+    .nav-glass{background:rgba(19,19,19,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+    .grad-btn{background:linear-gradient(135deg,#ffb4aa 0%,#E21B1B 100%)}
+    .grad-btn:hover{background:#fff;color:#000}
+    .skew{transform:skewX(6deg);display:inline-block}
+    .skew>span{display:inline-block;transform:skewX(-6deg)}
+    input,select,textarea{background:rgba(0,0,0,.5)!important;border-color:rgba(255,255,255,.1)!important;outline:none!important;color:#fff!important}
+    input:focus,select:focus,textarea:focus{border-color:#E21B1B!important}
+    input::placeholder,textarea::placeholder{color:rgba(255,255,255,.1)!important}
+    /* ── Mobile ── */
+    @media(max-width:767px){
+      .sched-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-left:-1.5rem;margin-right:-1.5rem;padding-left:1.5rem;padding-right:1.5rem}
+      .sched-grid{min-width:420px}
+      .sched-grid-2{min-width:280px}
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden selection:bg-primary selection:text-white">
+
+<!-- טקסטורה -->
+<div class="fixed inset-0 pointer-events-none bg-gritty z-50"></div>
+
+<!-- ════════════════════ ניווט ════ -->
+<nav class="fixed top-0 w-full z-40 nav-glass flex justify-between items-center px-8 py-2" style="border-bottom:1px solid rgba(255,255,255,.05)">
+  <a href="#home" class="flex items-center">
+    <img src="../logo_new.png" alt="מיקלסון MMA" class="h-16 w-auto object-contain"/>
+  </a>
+  <div class="hidden md:flex gap-10 items-center">
+    <a href="#fighters" class="font-headline font-bold text-xs tracking-widest uppercase text-white/60 hover:text-primary transition-colors">לוחמים</a>
+    <a href="#classes"  class="font-headline font-bold text-xs tracking-widest uppercase text-white/60 hover:text-primary transition-colors">אימונים</a>
+    <a href="#schedule" class="font-headline font-bold text-xs tracking-widest uppercase text-white/60 hover:text-primary transition-colors">לוח שעות</a>
+    <a href="#pricing"  class="font-headline font-bold text-xs tracking-widest uppercase text-white/60 hover:text-primary transition-colors">מחירים</a>
+    <a href="#contact"  class="font-headline font-bold text-xs tracking-widest uppercase text-primary">צור קשר</a>
+  </div>
+  <!-- Mobile menu button -->
+  <button id="menu-btn" class="md:hidden text-white" aria-label="תפריט">
+    <span class="material-symbols-outlined text-3xl">menu</span>
+  </button>
+  <a href="#contact" class="hidden md:block grad-btn text-white px-8 py-3 font-headline font-black text-xs tracking-widest uppercase transition-all duration-300">
+    הצטרף עכשיו
+  </a>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="fixed inset-0 z-30 hidden flex-col items-center justify-center gap-10" style="background:rgba(0,0,0,.97)">
+  <button id="menu-close" class="absolute top-6 left-8 text-white"><span class="material-symbols-outlined text-3xl">close</span></button>
+  <a href="#fighters" class="font-headline font-black text-4xl uppercase text-white hover:text-primary transition-colors nav-mobile-link">לוחמים</a>
+  <a href="#classes"  class="font-headline font-black text-4xl uppercase text-white hover:text-primary transition-colors nav-mobile-link">אימונים</a>
+  <a href="#schedule" class="font-headline font-black text-4xl uppercase text-white hover:text-primary transition-colors nav-mobile-link">לוח שעות</a>
+  <a href="#pricing"  class="font-headline font-black text-4xl uppercase text-white hover:text-primary transition-colors nav-mobile-link">מחירים</a>
+  <a href="#contact"  class="grad-btn text-white px-14 py-5 font-headline font-black text-lg tracking-widest uppercase mt-4 nav-mobile-link">הצטרף עכשיו</a>
+</div>
+
+<!-- ════════════════════ גיבור ════ -->
+<header class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black" id="home">
+  <div class="absolute inset-0 z-0">
+    <!-- Video background -->
+    <video autoplay muted loop playsinline
+      class="w-full h-full object-cover opacity-60"
+      style="filter:grayscale(60%) contrast(1.1)">
+      <source src="../back_scene.mp4" type="video/mp4"/>
+    </video>
+    <!-- Inward vignette: fades all 4 edges into black -->
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse 80% 70% at 50% 50%, transparent 20%, rgba(0,0,0,0.55) 60%, #131313 100%)"></div>
+    <!-- Top edge bleed into nav -->
+    <div class="absolute inset-x-0 top-0 h-40" style="background:linear-gradient(to bottom,#131313 0%,transparent 100%)"></div>
+    <!-- Bottom edge bleed into next section -->
+    <div class="absolute inset-x-0 bottom-0 h-56" style="background:linear-gradient(to top,#131313 0%,transparent 100%)"></div>
+  </div>
+
+  <!-- Content — centred -->
+  <div class="relative z-10 px-6 md:px-8 text-center max-w-5xl mx-auto pb-48 md:pb-0">
+    <div class="mb-6 flex items-center justify-center gap-4 reveal">
+      <div class="w-12 h-0.5 bg-primary"></div>
+      <span class="font-headline font-bold text-xs tracking-[.3em] uppercase text-primary">האחים מיכאלסון — מאז 2010</span>
+      <div class="w-12 h-0.5 bg-primary"></div>
+    </div>
+    <h1 class="font-headline font-black uppercase leading-[.85] tight mb-8">
+      <span class="block text-5xl sm:text-7xl md:text-[9rem] text-white reveal d1">הזירה</span>
+      <span class="block text-5xl sm:text-7xl md:text-[9rem] text-primary glow-red italic reveal d2">מחכה.</span>
+      <span class="block text-3xl sm:text-5xl md:text-7xl text-white/40 reveal d3">לך.</span>
+    </h1>
+    <p class="font-body text-white/70 text-base sm:text-xl mx-auto mb-10 tracking-widest uppercase reveal d3">
+      קחו את השליטה לידיים שלכם.
+    </p>
+    <div class="flex flex-col gap-4 justify-center reveal d3">
+      <a href="#contact" class="skew grad-btn text-white px-14 py-5 font-headline font-black text-sm tracking-widest uppercase text-center">
+        <span>התחל להתאמן</span>
+      </a>
+      <a href="#classes" class="skew text-white px-14 py-4 font-headline font-black text-sm tracking-widest uppercase text-center" style="border:1px solid rgba(255,255,255,.15);transition:all .3s" onmouseover="this.style.background='#fff';this.style.color='#000'" onmouseout="this.style.background='transparent';this.style.color='#fff'">
+        <span>צפה באימונים</span>
+      </a>
+    </div>
+  </div>
+  <!-- סטטיסטיקות -->
+  <div class="absolute bottom-0 left-0 right-0" style="border-top:1px solid rgba(255,255,255,.05);background:rgba(0,0,0,.65);backdrop-filter:blur(10px)">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-2 md:grid-cols-4">
+      <div class="py-5 md:py-8 px-4 md:px-6 text-center" style="border-left:1px solid rgba(255,255,255,.05)">
+        <div class="font-headline font-black text-3xl md:text-5xl text-primary">+16</div>
+        <div class="font-headline font-bold text-[9px] md:text-[10px] tracking-[.2em] md:tracking-[.3em] uppercase text-white/40 mt-1">שנות ניסיון</div>
+      </div>
+      <div class="py-5 md:py-8 px-4 md:px-6 text-center" style="border-left:1px solid rgba(255,255,255,.05)">
+        <div class="font-headline font-black text-3xl md:text-5xl text-white">+1,000</div>
+        <div class="font-headline font-bold text-[9px] md:text-[10px] tracking-[.2em] md:tracking-[.3em] uppercase text-white/40 mt-1">לוחמים שאומנו</div>
+      </div>
+      <div class="py-5 md:py-8 px-4 md:px-6 text-center" style="border-left:1px solid rgba(255,255,255,.05)">
+        <div class="font-headline font-black text-3xl md:text-5xl text-primary">+40</div>
+        <div class="font-headline font-bold text-[9px] md:text-[10px] tracking-[.2em] md:tracking-[.3em] uppercase text-white/40 mt-1">מדליות</div>
+      </div>
+      <div class="py-5 md:py-8 px-4 md:px-6 text-center">
+        <div class="font-headline font-black text-3xl md:text-5xl text-white">3</div>
+        <div class="font-headline font-bold text-[9px] md:text-[10px] tracking-[.2em] md:tracking-[.3em] uppercase text-white/40 mt-1">מאמנים מובילים</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════ מרקיז ════ -->
+<div class="bg-primary py-4 overflow-hidden">
+  <div class="flex gap-16 marquee whitespace-nowrap">
+    <span class="font-headline font-black text-sm tracking-widest text-white">לחימה משולבת</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">מואי תאי</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">היאבקות</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">ג'יוג'יטסו ברזילאי</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">ג'ודו</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">סמבו</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">קיקבוקסינג</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widests text-white">לחימה משולבת</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">מואי תאי</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">היאבקות</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">ג'יוג'יטסו ברזילאי</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">ג'ודו</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">סמבו</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+    <span class="font-headline font-black text-sm tracking-widest text-white">קיקבוקסינג</span>
+    <span class="font-headline font-black text-sm text-white/40">//</span>
+  </div>
+</div>
+
+<!-- ════════════════════ לוחמים ════ -->
+<section class="py-16 md:py-32 bg-black px-6 md:px-8 overflow-hidden" id="fighters">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-16">
+      <h2 class="font-headline font-black uppercase leading-[.85] tight">
+        <span class="block text-4xl md:text-8xl text-white">השושלת <span class="text-primary">//</span></span>
+        <span class="block text-2xl md:text-6xl text-white/20">הכר את הפינה שלך</span>
+      </h2>
+      <div class="w-full mt-10 mb-4" style="height:1px;background:#E21B1B"></div>
+      <div class="font-headline font-bold text-xs tracking-[.4em] text-primary uppercase overflow-hidden">
+        לחימה משולבת // מואי תאי // היאבקות // ג'יוג'יטסו ברזילאי // ג'ודו // סמבו // קיקבוקסינג // לחימה משולבת // מואי תאי // היאבקות //
+      </div>
+      <div class="w-full mt-4" style="height:1px;background:#E21B1B"></div>
+    </div>
+    <!-- קרוסלה -->
+    <div class="relative">
+      <!-- Track -->
+      <div id="fighters-track-wrap" class="overflow-hidden">
+        <div id="fighters-track" class="flex transition-transform duration-500 ease-out" style="will-change:transform">
+
+          <!-- ═══ דניאל מיכאלסון (ראשון) ═══ -->
+          <div class="fighters-slide flex-shrink-0 group" style="border:1px solid rgba(255,255,255,.08)">
+            <div class="relative overflow-hidden bg-surface-container-high" style="aspect-ratio:3/4">
+              <img src="../dani_mma.jpg"
+                class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt="דניאל מיכאלסון" style="object-position:top"/>
+              <div class="absolute inset-0" style="background:linear-gradient(to top,#000 0%,transparent 55%)"></div>
+              <div class="absolute bottom-0 left-0 right-0 bg-primary p-6">
+                <h3 class="font-headline font-black text-3xl uppercase leading-none mb-1">דניאל<br/>מיכאלסון</h3>
+                <div class="w-full my-3" style="height:1px;background:rgba(0,0,0,.3)"></div>
+                <div class="flex justify-between font-headline font-bold text-[10px] tracking-widest uppercase">
+                  <span>מאמן ראשי</span><span>לחימה משולבת</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ שוקי פארג' ═══ -->
+          <div class="fighters-slide flex-shrink-0 group" style="border:1px solid rgba(255,255,255,.08)">
+            <div class="relative overflow-hidden bg-surface-container-high" style="aspect-ratio:3/4">
+              <img src="../shuki_mma.png"
+                class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt="שוקי פארג'" style="object-position:top"/>
+              <div class="absolute inset-0" style="background:linear-gradient(to top,#000 0%,transparent 55%)"></div>
+              <div class="absolute bottom-0 left-0 right-0 bg-primary p-6">
+                <h3 class="font-headline font-black text-3xl uppercase leading-none mb-1">שוקי<br/>פארג'</h3>
+                <div class="w-full my-3" style="height:1px;background:rgba(0,0,0,.3)"></div>
+                <div class="flex justify-between font-headline font-bold text-[10px] tracking-widest uppercase">
+                  <span>לוחם MMA מקצועי</span><span>חגורה שחורה</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ דיוויד מיכאלסון ═══ -->
+          <div class="fighters-slide flex-shrink-0 group" style="border:1px solid rgba(255,255,255,.08)">
+            <div class="relative overflow-hidden bg-surface-container-high" style="aspect-ratio:3/4">
+              <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=800&q=80"
+                class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" alt="דיוויד מיכאלסון"/>
+              <div class="absolute inset-0" style="background:linear-gradient(to top,#000 0%,transparent 55%)"></div>
+              <div class="absolute bottom-0 left-0 right-0 bg-primary p-6">
+                <h3 class="font-headline font-black text-3xl uppercase leading-none mb-1">דיוויד<br/>מיכאלסון</h3>
+                <div class="w-full my-3" style="height:1px;background:rgba(0,0,0,.3)"></div>
+                <div class="flex justify-between font-headline font-bold text-[10px] tracking-widest uppercase">
+                  <span>מאמן BJJ חגורה שחורה</span><span>Ze Radiola</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- פקדים -->
+      <div class="flex items-center justify-between mt-6">
+        <!-- נקודות -->
+        <div class="flex gap-2" id="fighters-dots">
+          <button onclick="fGoTo(0)" class="fighters-dot" style="width:32px;height:3px;background:#E21B1B;transition:all .3s"></button>
+          <button onclick="fGoTo(1)" class="fighters-dot" style="width:12px;height:3px;background:rgba(255,255,255,.2);transition:all .3s"></button>
+          <button onclick="fGoTo(2)" class="fighters-dot" style="width:12px;height:3px;background:rgba(255,255,255,.2);transition:all .3s"></button>
+        </div>
+        <!-- חצים -->
+        <div class="flex gap-3">
+          <button onclick="fPrev()" class="font-headline font-black text-white flex items-center justify-center transition-all duration-200 hover:bg-primary"
+            style="width:48px;height:48px;border:1px solid rgba(255,255,255,.15)" aria-label="הקודם">
+            <span class="material-symbols-outlined text-xl">arrow_forward</span>
+          </button>
+          <button onclick="fNext()" class="font-headline font-black text-white flex items-center justify-center transition-all duration-200 hover:bg-primary"
+            style="width:48px;height:48px;border:1px solid rgba(255,255,255,.15)" aria-label="הבא">
+            <span class="material-symbols-outlined text-xl">arrow_back</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .fighters-slide{width:100%}
+      @media(min-width:768px){.fighters-slide{width:33.333%}}
+    </style>
+
+    <script>
+    (function(){
+      var track = document.getElementById('fighters-track');
+      var wrap  = document.getElementById('fighters-track-wrap');
+      var dots  = document.querySelectorAll('.fighters-dot');
+      var total = 3;
+      var cur   = 0;
+      var startX= 0;
+      var isDragging = false;
+
+      function slideW(){
+        var isMd = window.innerWidth >= 768;
+        return isMd ? wrap.offsetWidth / 3 : wrap.offsetWidth;
+      }
+
+      function updateDots(){
+        dots.forEach(function(d,i){
+          d.style.width  = i===cur ? '32px' : '12px';
+          d.style.background = i===cur ? '#E21B1B' : 'rgba(255,255,255,.2)';
+        });
+      }
+
+      function goTo(n){
+        cur = Math.max(0, Math.min(n, total-1));
+        track.style.transform = 'translateX('+(cur * slideW() * (document.dir==='rtl'?1:-1))+'px)';
+        updateDots();
+      }
+
+      window.fNext = function(){ goTo(cur+1); };
+      window.fPrev = function(){ goTo(cur-1); };
+      window.fGoTo = goTo;
+
+      /* touch / mouse swipe */
+      track.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;},{ passive:true });
+      track.addEventListener('touchend',function(e){
+        var dx=e.changedTouches[0].clientX-startX;
+        if(Math.abs(dx)>40){ dx>0 ? fPrev() : fNext(); }
+      },{ passive:true });
+
+      track.addEventListener('mousedown',function(e){startX=e.clientX;isDragging=true;});
+      window.addEventListener('mouseup',function(e){
+        if(!isDragging) return; isDragging=false;
+        var dx=e.clientX-startX;
+        if(Math.abs(dx)>40){ dx>0 ? fPrev() : fNext(); }
+      });
+
+      window.addEventListener('resize', function(){ goTo(cur); });
+    })();
+    </script>
+  </div>
+</section>
+
+
+<!-- ════════════════════ אודות ════ -->
+<section class="py-20 md:py-32 bg-black px-6 md:px-8 overflow-hidden">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-24 items-center">
+    <div>
+      <span class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-primary block mb-6">אודות המכון</span>
+      <h2 class="font-headline font-black text-4xl md:text-7xl uppercase tight leading-[.85] mb-8 md:mb-10">
+        נבנה על ידי לוחמים,<br/><span class="text-primary">בשביל לוחמים.</span>
+      </h2>
+      <p class="font-body text-white/60 text-base leading-[1.8] mb-6">
+        מועדון האחים מיכאלסון נולד ב-2010, בחצר הביתית של דניאל. אבל מורשת הקרב הולכת הרבה שנים אחורה — להיסטוריה של המשפחה באוזבקיסטן, להישרדות של העם היהודי, לעלייה למדינת ישראל. משפחת מיכאלסון עברה הכל.
+      </p>
+      <p class="font-body text-white/60 text-base leading-[1.8] mb-10">
+        היום, בהובלת דניאל מיכאלסון, המועדון הפך למקום שמייצר אלופים המתחרים בארץ ובחו"ל, עם שלושה מתקני אימונים שונים. בין אם אתם חדשים לגמרי או ברמה הכי גבוהה — אנחנו נמצא לכם את המקום הראוי. והכי חשוב: כולנו משפחה אחת, כולנו אחים.
+      </p>
+      <div class="grid grid-cols-2 gap-8">
+        <div style="border-right:2px solid #E21B1B;padding-right:1.5rem">
+          <div class="font-headline font-black text-4xl text-white">3 סניפים</div>
+          <div class="font-headline text-[10px] tracking-widest text-white/40 uppercase mt-1">מאובזרים וענקיים</div>
+        </div>
+        <div style="border-right:2px solid #E21B1B;padding-right:1.5rem">
+          <div class="font-headline font-black text-4xl text-white">זירות כלוב</div>
+          <div class="font-headline text-[10px] tracking-widest text-white/40 uppercase mt-1">ציוד ברמה הגבוהה ביותר</div>
+        </div>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="hidden md:block absolute -top-8 -right-8 w-full h-full" style="border:2px solid rgba(226,27,27,.2)"></div>
+      <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80"
+        class="w-full object-cover grayscale contrast-110" style="aspect-ratio:4/5" alt="מכון מיקלסון MMA"/>
+      <div class="absolute bottom-0 left-0 right-0 bg-primary p-6">
+        <div class="font-headline font-black text-sm uppercase tracking-widest">"קחו את השליטה לידיים שלכם."</div>
+        <div class="font-headline text-[10px] tracking-widest text-white/60 uppercase mt-1">— דניאל מיכאלסון</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ לוח שעות ════ -->
+<section class="py-16 md:py-24 px-4 md:px-8" style="background:#0e0e0e;border-top:1px solid rgba(255,255,255,.04)" id="schedule">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="mb-12 text-center">
+      <span class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-primary block mb-3">לוח שבועי</span>
+      <h2 class="font-headline font-black text-5xl md:text-6xl uppercase tight italic">
+        תוכנית <span class="text-primary" style="text-decoration:underline;text-decoration-thickness:5px;text-underline-offset:10px">האימונים</span>
+      </h2>
+    </div>
+
+    <!-- שורת כלים: מזרון פתוח + כפתורי סניף -->
+    <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+      <!-- כפתורי סניף -->
+      <div class="flex gap-2 flex-wrap">
+        <button onclick="showBranch('naot')" id="tab-naot"
+          class="font-headline font-black text-xs tracking-widest uppercase px-7 py-3 transition-all duration-200"
+          style="background:#E21B1B;color:#fff">נאות שמיר</button>
+        <button onclick="showBranch('pais')" id="tab-pais"
+          class="font-headline font-black text-xs tracking-widest uppercase px-7 py-3 transition-all duration-200"
+          style="background:transparent;color:rgba(255,255,255,.45);border:1px solid rgba(93,63,59,.4)">מרכז פיס</button>
+        <button onclick="showBranch('kirya')" id="tab-kirya"
+          class="font-headline font-black text-xs tracking-widest uppercase px-7 py-3 transition-all duration-200"
+          style="background:transparent;color:rgba(255,255,255,.45);border:1px solid rgba(93,63,59,.4)">קרית האומנים</button>
+      </div>
+      <!-- מזרון פתוח -->
+      <div class="flex items-center gap-3 px-5 py-3" style="background:#1a1a1a;border:1px solid rgba(226,27,27,.25)">
+        <span style="width:8px;height:8px;background:#E21B1B;display:inline-block;flex-shrink:0"></span>
+        <span class="font-headline font-bold text-xs tracking-widest uppercase text-white/70">מזרון פתוח בימי שישי</span>
+      </div>
+    </div>
+
+
+    <!-- ════ טבלה: נאות שמיר ════ -->
+    <div id="branch-naot">
+      <div class="sched-wrap">
+      <!-- כותרת עמודות -->
+      <div class="grid sched-grid" style="grid-template-columns:75px repeat(5,1fr);background:#1a1a1a;border-bottom:2px solid rgba(226,27,27,.35)">
+        <div class="px-3 py-4 font-headline font-bold text-[10px] tracking-widest uppercase text-white/30">שעה</div>
+        <div class="px-3 py-4 text-center font-headline font-bold text-[10px] tracking-widest uppercase text-white/50" style="border-right:1px solid rgba(255,255,255,.05)" data-naot-day="0">ראשון</div>
+        <div class="px-3 py-4 text-center font-headline font-bold text-[10px] tracking-widest uppercase text-white/50" style="border-right:1px solid rgba(255,255,255,.05)" data-naot-day="1">שני</div>
+        <div class="px-3 py-4 text-center font-headline font-bold text-[10px] tracking-widest uppercase text-white/50" style="border-right:1px solid rgba(255,255,255,.05)" data-naot-day="3">רביעי</div>
+        <div class="px-3 py-4 text-center font-headline font-bold text-[10px] tracking-widest uppercase text-white/50" style="border-right:1px solid rgba(255,255,255,.05)" data-naot-day="4">חמישי</div>
+        <div class="px-3 py-4 text-center font-headline font-bold text-[10px] tracking-widest uppercase text-primary/60">שישי</div>
+      </div>
+      <!-- 16:30 -->
+      <div class="grid sched-grid" style="grid-template-columns:75px repeat(5,1fr);background:#131313;border-bottom:1px solid rgba(255,255,255,.05)">
+        <div class="px-3 py-5 font-headline font-black text-sm text-white" style="border-left:2px solid rgba(226,27,27,.5)">16:30</div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">MMA ילדים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">א'–ד'</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-white">MMA ילדים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">א'–ד'</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">MMA ילדים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">א'–ד'</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-white">MMA ילדים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">א'–ד'</div>
+        </div>
+        <div class="px-3 py-5 text-center flex flex-col items-center justify-center">
+          <div class="font-headline font-bold text-xs text-primary/80">מזרון פתוח</div>
+          <div class="font-headline text-[10px] text-white/30 mt-1">כל הרמות</div>
+        </div>
+      </div>
+      <!-- 17:15 -->
+      <div class="grid sched-grid" style="grid-template-columns:75px repeat(5,1fr);background:#0e0e0e;border-bottom:1px solid rgba(255,255,255,.05)">
+        <div class="px-3 py-5 font-headline font-black text-sm text-white" style="border-left:2px solid rgba(226,27,27,.5)">17:15</div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-white">ילדים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">ה'–ח'</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">ילדים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">ה'–ח'</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-white">ילדים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">ה'–ח'</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">ילדים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">ה'–ח'</div>
+        </div>
+        <div class="px-3 py-5 text-center flex items-center justify-center">
+          <span class="font-headline text-white/20 text-lg">—</span>
+        </div>
+      </div>
+      <!-- 18:30 -->
+      <div class="grid sched-grid" style="grid-template-columns:75px repeat(5,1fr);background:#131313;border-bottom:1px solid rgba(255,255,255,.05)">
+        <div class="px-3 py-5 font-headline font-black text-sm text-white" style="border-left:2px solid rgba(226,27,27,.5)">18:30</div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">נוער</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">ט'–י"ב</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-white">נוער</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">ט'–י"ב</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">נוער</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">ט'–י"ב</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-white">נוער</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">ט'–י"ב</div>
+        </div>
+        <div class="px-3 py-5 text-center flex items-center justify-center">
+          <span class="font-headline text-white/20 text-lg">—</span>
+        </div>
+      </div>
+      <!-- 19:45 -->
+      <div class="grid sched-grid" style="grid-template-columns:75px repeat(5,1fr);background:#0e0e0e">
+        <div class="px-3 py-5 font-headline font-black text-sm text-white" style="border-left:2px solid rgba(226,27,27,.5)">19:45</div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-white">בוגרים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">18+</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">בוגרים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">18+</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-white">בוגרים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">18+</div>
+        </div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">בוגרים</div>
+          <div class="font-headline text-[10px] text-white/35 mt-1">18+</div>
+        </div>
+        <div class="px-3 py-5 text-center flex items-center justify-center">
+          <span class="font-headline text-white/20 text-lg">—</span>
+        </div>
+      </div>
+      </div><!-- /sched-wrap -->
+    </div>
+
+    <!-- ════ טבלה: מרכז פיס ════ -->
+    <div id="branch-pais" style="display:none">
+      <div class="sched-wrap">
+      <div class="grid sched-grid-2" style="grid-template-columns:75px repeat(2,1fr);background:#1a1a1a;border-bottom:2px solid rgba(226,27,27,.35)">
+        <div class="px-3 py-4 font-headline font-bold text-[10px] tracking-widest uppercase text-white/30">שעה</div>
+        <div class="px-3 py-4 text-center font-headline font-bold text-[10px] tracking-widest uppercase text-white/50" style="border-right:1px solid rgba(255,255,255,.05)" data-pais-day="1">שני</div>
+        <div class="px-3 py-4 text-center font-headline font-bold text-[10px] tracking-widest uppercase text-white/50" data-pais-day="4">חמישי</div>
+      </div>
+      <div class="grid sched-grid-2" style="grid-template-columns:75px repeat(2,1fr);background:#131313;border-bottom:1px solid rgba(255,255,255,.05)">
+        <div class="px-3 py-5 font-headline font-black text-sm text-white" style="border-left:2px solid rgba(226,27,27,.5)">17:00</div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">MMA ילדים</div>
+        </div>
+        <div class="px-3 py-5 text-center">
+          <div class="font-headline font-bold text-xs text-white">MMA ילדים</div>
+        </div>
+      </div>
+      <div class="grid sched-grid-2" style="grid-template-columns:75px repeat(2,1fr);background:#0e0e0e">
+        <div class="px-3 py-5 font-headline font-black text-sm text-white" style="border-left:2px solid rgba(226,27,27,.5)">17:45</div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-white">נוער</div>
+        </div>
+        <div class="px-3 py-5 text-center">
+          <div class="font-headline font-bold text-xs text-primary">נוער</div>
+        </div>
+      </div>
+      </div><!-- /sched-wrap -->
+    </div>
+
+    <!-- ════ טבלה: קרית האומנים ════ -->
+    <div id="branch-kirya" style="display:none">
+      <div class="sched-wrap">
+      <div class="grid sched-grid-2" style="grid-template-columns:75px repeat(2,1fr);background:#1a1a1a;border-bottom:2px solid rgba(226,27,27,.35)">
+        <div class="px-3 py-4 font-headline font-bold text-[10px] tracking-widest uppercase text-white/30">שעה</div>
+        <div class="px-3 py-4 text-center font-headline font-bold text-[10px] tracking-widest uppercase text-white/50" style="border-right:1px solid rgba(255,255,255,.05)" data-kirya-day="1">שני</div>
+        <div class="px-3 py-4 text-center font-headline font-bold text-[10px] tracking-widest uppercase text-white/50" data-kirya-day="4">חמישי</div>
+      </div>
+      <div class="grid sched-grid-2" style="grid-template-columns:75px repeat(2,1fr);background:#131313;border-bottom:1px solid rgba(255,255,255,.05)">
+        <div class="px-3 py-5 font-headline font-black text-sm text-white" style="border-left:2px solid rgba(226,27,27,.5)">17:00</div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">MMA ילדים</div>
+        </div>
+        <div class="px-3 py-5 text-center">
+          <div class="font-headline font-bold text-xs text-white">MMA ילדים</div>
+        </div>
+      </div>
+      <div class="grid sched-grid-2" style="grid-template-columns:75px repeat(2,1fr);background:#0e0e0e;border-bottom:1px solid rgba(255,255,255,.05)">
+        <div class="px-3 py-5 font-headline font-black text-sm text-white" style="border-left:2px solid rgba(226,27,27,.5)">17:45</div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-white">נוער</div>
+        </div>
+        <div class="px-3 py-5 text-center">
+          <div class="font-headline font-bold text-xs text-primary">נוער</div>
+        </div>
+      </div>
+      <div class="grid sched-grid-2" style="grid-template-columns:75px repeat(2,1fr);background:#131313">
+        <div class="px-3 py-5 font-headline font-black text-sm text-white" style="border-left:2px solid rgba(226,27,27,.5)">19:00</div>
+        <div class="px-3 py-5 text-center" style="border-right:1px solid rgba(255,255,255,.05)">
+          <div class="font-headline font-bold text-xs text-primary">בוגרים</div>
+        </div>
+        <div class="px-3 py-5 text-center">
+          <div class="font-headline font-bold text-xs text-white">בוגרים</div>
+        </div>
+      </div>
+      </div><!-- /sched-wrap -->
+    </div>
+
+    <p class="font-body text-white/25 text-[10px] tracking-widest uppercase mt-5 text-center">לוח השעות כפוף לשינויים · @michaelsonmma</p>
+  </div>
+</section>
+
+<script>
+  function showBranch(id) {
+    ['naot','pais','kirya'].forEach(function(b){
+      var table = document.getElementById('branch-'+b);
+      var tab   = document.getElementById('tab-'+b);
+      if (b === id) {
+        table.style.display = 'block';
+        tab.style.background = '#E21B1B';
+        tab.style.color = '#fff';
+        tab.style.border = 'none';
+      } else {
+        table.style.display = 'none';
+        tab.style.background = 'transparent';
+        tab.style.color = 'rgba(255,255,255,.45)';
+        tab.style.border = '1px solid rgba(93,63,59,.4)';
+      }
+    });
+  }
+  (function(){
+    var today = new Date().getDay();
+    ['naot','pais','kirya'].forEach(function(b){
+      document.querySelectorAll('[data-'+b+'-day]').forEach(function(el){
+        if(parseInt(el.getAttribute('data-'+b+'-day')) === today){
+          el.style.color = '#E21B1B';
+          el.style.borderBottom = '2px solid #E21B1B';
+          el.style.paddingBottom = '14px';
+        }
+      });
+    });
+  })();
+</script>
+
+<!-- ════════════════════ מחירים ════ -->
+<section class="py-16 md:py-32 bg-black px-4 md:px-8" id="pricing">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-20 text-center">
+      <span class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-primary block mb-4">מנויים</span>
+      <h2 class="font-headline font-black text-5xl md:text-7xl uppercase tight">
+        בחר את <span class="text-primary">//</span><br/>המחויבות שלך
+      </h2>
+    </div>
+    <!-- קרוסלה מחירים -->
+    <div class="relative">
+      <div id="pricing-wrap" class="overflow-hidden">
+        <div id="pricing-track" class="flex transition-transform duration-500 ease-out" style="will-change:transform">
+
+          <!-- ═══ מתחיל ═══ -->
+          <div class="pricing-slide flex-shrink-0 p-8 md:p-10 flex flex-col" style="background:#0e0e0e;border:1px solid rgba(255,255,255,.07)">
+            <div class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-white/40 mb-6">מתחיל</div>
+            <div class="font-headline font-black text-6xl text-white mb-2">₪299<span class="text-2xl text-white/40">/חודש</span></div>
+            <div class="font-headline text-[10px] tracking-widest text-white/30 uppercase mb-10">ללא התחייבות</div>
+            <div class="w-full mb-10" style="height:1px;background:rgba(255,255,255,.05)"></div>
+            <ul class="space-y-5 font-body text-sm text-white/60 flex-1">
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-base">check</span>גישה לשיעור אחד ביום</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-base">check</span>בחר דיסציפלינה אחת</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-base">check</span>גישה לחדר הלבשה</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-white/20 text-base">close</span><span class="text-white/20">מחצלת פתוחה</span></li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-white/20 text-base">close</span><span class="text-white/20">קבוצת תחרויות</span></li>
+            </ul>
+            <a href="#contact" class="mt-10 text-white py-4 font-headline font-bold uppercase tracking-widest text-xs text-center block transition-all duration-300" style="border:1px solid rgba(255,255,255,.2)" onmouseover="this.style.background='#fff';this.style.color='#000'" onmouseout="this.style.background='transparent';this.style.color='#fff'">
+              צא לדרך
+            </a>
+          </div>
+
+          <!-- ═══ לוחם (פופולרי) ═══ -->
+          <div class="pricing-slide flex-shrink-0 p-8 md:p-10 flex flex-col relative overflow-hidden bg-primary" style="border:1px solid rgba(255,255,255,.07)">
+            <div class="absolute top-0 left-0 bg-black text-white font-headline font-bold text-[9px] tracking-widest uppercase px-4 py-2">הכי פופולרי</div>
+            <div class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-white/70 mb-6">לוחם</div>
+            <div class="font-headline font-black text-6xl text-white mb-2">₪499<span class="text-2xl text-white/60">/חודש</span></div>
+            <div class="font-headline text-[10px] tracking-widest text-white/60 uppercase mb-10">חודש לחודש</div>
+            <div class="w-full mb-10" style="height:1px;background:rgba(255,255,255,.2)"></div>
+            <ul class="space-y-5 font-body text-sm text-white flex-1">
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-white text-base">check</span>שיעורים ללא הגבלה</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-white text-base">check</span>כל הדיסציפלינות</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-white text-base">check</span>גישה למחצלת פתוחה</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-white text-base">check</span>חדר הלבשה + אחסון ציוד</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-white/60 text-base">close</span><span class="text-white/60">קבוצת תחרויות</span></li>
+            </ul>
+            <a href="#contact" class="mt-10 bg-black text-white py-4 font-headline font-bold uppercase tracking-widest text-xs text-center block transition-all duration-300" onmouseover="this.style.background='#fff';this.style.color='#000'" onmouseout="this.style.background='#000';this.style.color='#fff'">
+              הצטרף לקבוצה
+            </a>
+          </div>
+
+          <!-- ═══ פרו ═══ -->
+          <div class="pricing-slide flex-shrink-0 p-8 md:p-10 flex flex-col" style="background:#0e0e0e;border:1px solid rgba(255,255,255,.07)">
+            <div class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-white/40 mb-6">ספורטאי פרו</div>
+            <div class="font-headline font-black text-6xl text-white mb-2">₪849<span class="text-2xl text-white/40">/חודש</span></div>
+            <div class="font-headline text-[10px] tracking-widest text-white/30 uppercase mb-10">התחייבות שנתית</div>
+            <div class="w-full mb-10" style="height:1px;background:rgba(255,255,255,.05)"></div>
+            <ul class="space-y-5 font-body text-sm text-white/60 flex-1">
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-base">check</span>הכל בתוכנית לוחם</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-base">check</span>קבוצת תחרויות</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-base">check</span>אימון אישי (2 בחודש)</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-base">check</span>ניתוח וידאו</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-base">check</span>תמיכה במחנה לחימה</li>
+            </ul>
+            <a href="#contact" class="mt-10 text-white py-4 font-headline font-bold uppercase tracking-widest text-xs text-center block transition-all duration-300" style="border:1px solid rgba(255,255,255,.2)" onmouseover="this.style.background='#fff';this.style.color='#000'" onmouseout="this.style.background='transparent';this.style.color='#fff'">
+              עבור לפרו
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- פקדים -->
+      <div class="flex items-center justify-between mt-6">
+        <div class="flex gap-2" id="pricing-dots">
+          <button onclick="pGoTo(0)" class="pricing-dot" style="width:32px;height:3px;background:#E21B1B;transition:all .3s"></button>
+          <button onclick="pGoTo(1)" class="pricing-dot" style="width:12px;height:3px;background:rgba(255,255,255,.2);transition:all .3s"></button>
+          <button onclick="pGoTo(2)" class="pricing-dot" style="width:12px;height:3px;background:rgba(255,255,255,.2);transition:all .3s"></button>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="pPrev()" class="text-white flex items-center justify-center transition-all duration-200 hover:bg-primary"
+            style="width:48px;height:48px;border:1px solid rgba(255,255,255,.15)" aria-label="הקודם">
+            <span class="material-symbols-outlined text-xl">arrow_forward</span>
+          </button>
+          <button onclick="pNext()" class="text-white flex items-center justify-center transition-all duration-200 hover:bg-primary"
+            style="width:48px;height:48px;border:1px solid rgba(255,255,255,.15)" aria-label="הבא">
+            <span class="material-symbols-outlined text-xl">arrow_back</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .pricing-slide{width:100%}
+      @media(min-width:768px){.pricing-slide{width:33.333%}}
+    </style>
+
+    <script>
+    (function(){
+      var track = document.getElementById('pricing-track');
+      var wrap  = document.getElementById('pricing-wrap');
+      var dots  = document.querySelectorAll('.pricing-dot');
+      var total = 3;
+      var cur   = 0;
+      var startX= 0;
+      var dragging = false;
+
+      function slideW(){
+        return window.innerWidth >= 768 ? wrap.offsetWidth / 3 : wrap.offsetWidth;
+      }
+
+      function updateDots(){
+        dots.forEach(function(d,i){
+          d.style.width     = i===cur ? '32px' : '12px';
+          d.style.background= i===cur ? '#E21B1B' : 'rgba(255,255,255,.2)';
+        });
+      }
+
+      function goTo(n){
+        cur = Math.max(0, Math.min(n, total-1));
+        track.style.transform = 'translateX('+(cur * slideW() * (document.dir==='rtl' ? 1 : -1))+'px)';
+        updateDots();
+      }
+
+      window.pNext = function(){ goTo(cur+1); };
+      window.pPrev = function(){ goTo(cur-1); };
+      window.pGoTo = goTo;
+
+      track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+      track.addEventListener('touchend',   function(e){
+        var dx = e.changedTouches[0].clientX - startX;
+        if(Math.abs(dx) > 40){ dx > 0 ? pPrev() : pNext(); }
+      }, {passive:true});
+
+      track.addEventListener('mousedown', function(e){ startX = e.clientX; dragging = true; });
+      window.addEventListener('mouseup',  function(e){
+        if(!dragging) return; dragging = false;
+        var dx = e.clientX - startX;
+        if(Math.abs(dx) > 40){ dx > 0 ? pPrev() : pNext(); }
+      });
+
+      window.addEventListener('resize', function(){ goTo(cur); });
+    })();
+    </script>
+
+    <p class="text-center font-body text-white/30 text-xs tracking-widest uppercase mt-8">השיעור הראשון תמיד חינם. ללא התחייבות.</p>
+  </div>
+</section>
+
+<!-- ════════════════════ צור קשר ════ -->
+<section class="flex flex-col md:flex-row bg-black" style="border-top:1px solid rgba(255,255,255,.04)" id="contact">
+  <!-- שמאל -->
+  <div class="w-full md:w-5/12 relative overflow-hidden bg-black flex items-center justify-center py-16 md:py-24 px-6 md:px-8" style="border-left:1px solid rgba(255,255,255,.04)">
+    <div class="absolute inset-0 flex justify-around overflow-hidden opacity-5 select-none pointer-events-none">
+      <div class="vert font-headline font-black leading-none uppercase tracking-tighter text-primary" style="font-size:10rem">לחום // דם //</div>
+      <div class="vert font-headline font-black leading-none uppercase tracking-tighter text-primary pt-32" style="font-size:10rem">זיעה // נצח //</div>
+    </div>
+    <div class="relative z-10 w-full">
+      <span class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-primary block mb-6">צור קשר</span>
+      <h2 class="font-headline font-black text-5xl md:text-7xl uppercase tight leading-[.85] text-white mb-12">
+        מוכן<br/>להילחם?<br/><span class="text-primary">בוא.</span>
+      </h2>
+      <div class="space-y-8">
+        <div class="flex items-start gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5">location_on</span>
+          <div>
+            <div class="font-headline font-bold text-xs tracking-widest uppercase text-white/40 mb-2">כתובת</div>
+            <div class="font-body text-white/80 text-sm leading-7">
+              <span class="text-primary/70 font-headline font-bold text-[10px] tracking-widest uppercase block">קרית האומנים</span>
+              ישראל פוליאקוב 1, רמלה<br/>
+              <span class="text-primary/70 font-headline font-bold text-[10px] tracking-widest uppercase block mt-2">מרכז פיס</span>
+              מבצע משה 20, רמלה<br/>
+              <span class="text-primary/70 font-headline font-bold text-[10px] tracking-widest uppercase block mt-2">נאות שמיר</span>
+              יגאל דין 4, רמלה
+            </div>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5">phone</span>
+          <div>
+            <div class="font-headline font-bold text-xs tracking-widest uppercase text-white/40 mb-1">טלפון</div>
+            <div class="font-body text-white/80 text-sm">050-220-8046 <span class="text-white/40 text-xs">— דניאל</span></div>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5">mail</span>
+          <div>
+            <div class="font-headline font-bold text-xs tracking-widest uppercase text-white/40 mb-1">אימייל</div>
+            <div class="font-body text-white/80 text-sm">daniel4mma@gmail.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ימין: טופס -->
+  <div class="w-full md:w-7/12 flex items-center justify-center py-16 md:py-24 px-6 md:px-24" style="background:#1a1a1a">
+    <div class="w-full max-w-xl">
+      <div class="mb-14">
+        <h2 class="font-headline font-black uppercase tight leading-[.8] mb-4" style="font-size:clamp(3rem,8vw,5.5rem)">
+          החוזה <span class="text-primary">//</span>
+        </h2>
+        <p class="font-body text-white/50 uppercase text-sm tracking-widest">המורשת שלך מתחילה כאן. ניצור קשר תוך 24 שעות.</p>
+        <div class="mt-6" style="height:4px;width:6rem;background:#E21B1B"></div>
+      </div>
+      <form id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+        <!-- Web3Forms hidden fields -->
+        <input type="hidden" name="access_key" value="0473de2d-a6cb-49e0-824e-2ca65bc2d66f"/>
+        <input type="hidden" name="subject" value="פנייה חדשה מהאתר — האחים מיכאלסון MMA"/>
+        <input type="hidden" name="from_name" value="אתר מיכאלסון MMA"/>
+        <input type="hidden" name="redirect" value="false"/>
+
+        <div class="space-y-3">
+          <label class="font-headline font-bold uppercase text-xs tracking-widest text-primary block">שם פרטי</label>
+          <input type="text" name="first_name" placeholder="ישראל" required class="w-full border-0 border-b-2 p-4 uppercase tracking-widest font-body"/>
+        </div>
+        <div class="space-y-3">
+          <label class="font-headline font-bold uppercase text-xs tracking-widest text-primary block">שם משפחה</label>
+          <input type="text" name="last_name" placeholder="ישראלי" required class="w-full border-0 border-b-2 p-4 uppercase tracking-widest font-body"/>
+        </div>
+        <div class="space-y-3">
+          <label class="font-headline font-bold uppercase text-xs tracking-widest text-primary block">כתובת אימייל</label>
+          <input type="email" name="email" placeholder="FIGHTER@ARENA.CO.IL" required class="w-full border-0 border-b-2 p-4 uppercase tracking-widest font-body"/>
+        </div>
+        <div class="space-y-3">
+          <label class="font-headline font-bold uppercase text-xs tracking-widest text-primary block">מספר טלפון</label>
+          <input type="tel" name="phone" placeholder="050-000-0000" class="w-full border-0 border-b-2 p-4 uppercase tracking-widest font-body"/>
+        </div>
+        <div class="space-y-3">
+          <label class="font-headline font-bold uppercase text-xs tracking-widest text-primary block">רמת ניסיון</label>
+          <div class="relative">
+            <select name="experience" class="w-full border-0 border-b-2 p-4 uppercase tracking-widest appearance-none font-body">
+              <option value="">בחר רמה</option>
+              <option>מתחיל מוחלט</option>
+              <option>קצת ניסיון (0–2 שנים)</option>
+              <option>בינוני (2–5 שנים)</option>
+              <option>מתקדם (5+ שנים)</option>
+              <option>לוחם מקצועי / חצי מקצועי</option>
+            </select>
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/20">expand_more</span>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <label class="font-headline font-bold uppercase text-xs tracking-widest text-primary block">מעוניין ב</label>
+          <div class="relative">
+            <select name="interest" class="w-full border-0 border-b-2 p-4 uppercase tracking-widest appearance-none font-body">
+              <option value="">בחר שיעור</option>
+              <option>ג'יו ג'יטסו ברזילאי</option>
+              <option>מואי תאי / קיקבוקסינג</option>
+              <option>MMA</option>
+              <option>היאבקות</option>
+              <option>כוח וסיבולת</option>
+              <option>MMA לילדים</option>
+              <option>כל השיעורים</option>
+            </select>
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/20">expand_more</span>
+          </div>
+        </div>
+        <div class="md:col-span-2 space-y-3">
+          <label class="font-headline font-bold uppercase text-xs tracking-widest text-primary block">הודעה (אופציונלי)</label>
+          <textarea name="message" rows="4" placeholder="ספר לנו על המטרות שלך..." class="w-full border-0 border-b-2 p-4 uppercase tracking-widest font-body resize-none"></textarea>
+        </div>
+        <div class="md:col-span-2 pt-4">
+          <button type="submit" id="submit-btn" class="w-full text-white py-6 text-lg font-headline font-black uppercase tracking-[.2em] transition-all duration-300 skew grad-btn">
+            <span>שלח // חתום על החוזה</span>
+          </button>
+          <p class="text-center font-headline text-[10px] tracking-[.3em] text-white/20 uppercase mt-6">בשליחת הטופס, אתה מסכים ליצירת קשר. ללא ספאם — לעולם.</p>
+        </div>
+        <div id="success-msg" class="md:col-span-2 hidden">
+          <div class="bg-primary p-6 text-center">
+            <div class="font-headline font-black text-xl uppercase tracking-widest text-white mb-2">✓ נשלח בהצלחה</div>
+            <div class="font-body text-white/70 text-sm">ניצור איתך קשר תוך 24 שעות. הזירה מחכה.</div>
+          </div>
+        </div>
+        <div id="error-msg" class="md:col-span-2 hidden">
+          <div class="p-5 text-center" style="border:1px solid rgba(226,27,27,.4);background:rgba(226,27,27,.08)">
+            <div class="font-headline font-bold text-sm uppercase tracking-widest text-primary">שגיאה בשליחה — נסה שוב או פנה ישירות ל־daniel4mma@gmail.com</div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ פוטר ════ -->
+<footer class="bg-black px-6 md:px-12 py-12 md:py-16" style="border-top:1px solid rgba(255,255,255,.04)">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+      <div class="max-w-xs">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 bg-primary flex items-center justify-center flex-shrink-0">
+            <span class="font-headline font-black text-white text-[10px]">MMA</span>
+          </div>
+          <span class="font-headline font-black text-white text-base tracking-tight italic uppercase">מיקלסון MMA</span>
+        </div>
+        <p class="font-body text-white/30 text-xs leading-relaxed">מרכז ספורטאי הלחימה המוביל בישראל. מאמנים אלופים מאז 2008.</p>
+        <div class="flex gap-4 mt-8">
+          <a href="#" class="text-white/30 hover:text-white transition-colors" aria-label="אינסטגרם">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="text-white/30 hover:text-white transition-colors" aria-label="פייסבוק">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="text-white/30 hover:text-white transition-colors" aria-label="טיקטוק">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-12">
+        <div>
+          <div class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-primary mb-6">אימונים</div>
+          <ul class="space-y-4">
+            <li><a href="#classes" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">ג'יו ג'יטסו ברזילאי</a></li>
+            <li><a href="#classes" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">מואי תאי</a></li>
+            <li><a href="#classes" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">MMA</a></li>
+            <li><a href="#classes" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">היאבקות</a></li>
+            <li><a href="#classes" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">MMA לילדים</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-primary mb-6">המכון</div>
+          <ul class="space-y-4">
+            <li><a href="#fighters" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">המאמנים</a></li>
+            <li><a href="#schedule" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">לוח שעות</a></li>
+            <li><a href="#pricing"  class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">מנויים</a></li>
+            <li><a href="#contact"  class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">צור קשר</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-primary mb-6">משפטי</div>
+          <ul class="space-y-4">
+            <li><a href="#" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">מדיניות פרטיות</a></li>
+            <li><a href="#" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">תנאי שימוש</a></li>
+            <li><a href="#" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">כתב ויתור</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-8" style="border-top:1px solid rgba(255,255,255,.04)">
+      <span class="font-body text-[10px] tracking-[.3em] uppercase text-white/20">© 2024 מיקלסון אחים MMA. כל הזכויות שמורות.</span>
+      <span class="font-body text-[10px] tracking-[.3em] uppercase text-white/20">רחוב הלחימה 142, תל אביב</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      const t=document.querySelector(a.getAttribute('href'));
+      if(t){t.scrollIntoView({behavior:'smooth',block:'start'});}
+      // Close mobile menu if open
+      document.getElementById('mobile-menu').classList.add('hidden');
+      document.getElementById('mobile-menu').classList.remove('flex');
+    });
+  });
+
+  // Mobile menu
+  document.getElementById('menu-btn').addEventListener('click',()=>{
+    const m=document.getElementById('mobile-menu');
+    m.classList.toggle('hidden');
+    m.classList.toggle('flex');
+  });
+  document.getElementById('menu-close').addEventListener('click',()=>{
+    const m=document.getElementById('mobile-menu');
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+  });
+
+  // Nav active on scroll
+  const sections=document.querySelectorAll('section[id],header[id]');
+  const navLinks=document.querySelectorAll('nav a[href^="#"]');
+  window.addEventListener('scroll',()=>{
+    let cur='';
+    sections.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id;});
+    navLinks.forEach(l=>{
+      l.style.color=l.getAttribute('href')==='#'+cur?'#E21B1B':'rgba(255,255,255,0.6)';
+    });
+  },{passive:true});
+
+  // Contact form — Web3Forms
+  document.getElementById('contact-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var btn = document.getElementById('submit-btn');
+    var successMsg = document.getElementById('success-msg');
+    var errorMsg  = document.getElementById('error-msg');
+
+    btn.style.opacity = '0.5';
+    btn.style.pointerEvents = 'none';
+    btn.querySelector('span').textContent = 'שולח...';
+
+    try {
+      var data = new FormData(this);
+      var res  = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data
+      });
+      var json = await res.json();
+
+      if (json.success) {
+        btn.style.display = 'none';
+        successMsg.classList.remove('hidden');
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        this.reset();
+      } else {
+        throw new Error(json.message || 'שגיאה');
+      }
+    } catch(err) {
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+      btn.querySelector('span').textContent = 'שלח // חתום על החוזה';
+      if(errorMsg) errorMsg.classList.remove('hidden');
+    }
+  });
+
+  // Highlight today's schedule column
+  (function(){
+    const day=new Date().getDay(); // 0=Sun,1=Mon,...,6=Sat
+    const ids=['col-sun','col-mon','col-tue','col-wed','col-thu','col-fri','col-sat'];
+    const el=document.getElementById(ids[day]);
+    if(el){el.style.borderTop='4px solid #E21B1B';}
+  })();
+</script>
+</body>
+</html>
