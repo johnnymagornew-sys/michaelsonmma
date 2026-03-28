@@ -1011,7 +1011,7 @@
           <div class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-primary mb-6">משפטי</div>
           <ul class="space-y-4">
             <li><a href="#" onclick="document.getElementById('privacy-modal').classList.remove('hidden');return false;" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">מדיניות פרטיות</a></li>
-            <li><a href="#" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">תנאי שימוש</a></li>
+            <li><a href="#" onclick="document.getElementById('terms-modal').classList.remove('hidden');return false;" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">תנאי שימוש</a></li>
             <li><a href="#" class="font-body text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest">כתב ויתור</a></li>
           </ul>
         </div>
@@ -1103,6 +1103,92 @@
     if(el){el.style.borderTop='4px solid #E21B1B';}
   })();
 </script>
+<!-- ════ תנאי שימוש Modal ════ -->
+<div id="terms-modal" class="hidden fixed inset-0 z-[999] flex items-center justify-center p-4" style="background:rgba(0,0,0,.85);backdrop-filter:blur(6px)">
+  <div class="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto bg-[#131313]" style="border:1px solid rgba(255,255,255,.1)">
+    <div class="sticky top-0 flex items-center justify-between px-8 py-5 bg-[#131313]" style="border-bottom:1px solid rgba(255,255,255,.08)">
+      <span class="font-headline font-black text-white uppercase tracking-widest text-sm">תקנון אתר</span>
+      <button onclick="document.getElementById('terms-modal').classList.add('hidden')" class="text-white/40 hover:text-white transition-colors text-2xl leading-none">&times;</button>
+    </div>
+    <div class="px-8 py-8 font-body text-white/70 text-sm leading-8 space-y-6" dir="rtl">
+
+      <div>
+        <h3 class="font-headline font-bold text-white uppercase tracking-widest text-xs mb-3">מבוא</h3>
+        <p>ברוכים הבאים לאתר MICHAELSON MMA (להלן: "האתר") המופעל על ידי האחים מיכאלסון MMA, מכתובת ישראל פוליאקוב 1, רמלה (להלן: "הנהלת האתר" ו/או "החברה").</p>
+        <p>כל שימוש באתר מהווה הסכמה לתקנון זה, על התנאים וההגבלות הכלולים בו. התקנון עלול להשתנות מעת לעת, ועל המשתמש להתעדכן בתקנון בכל כניסה לאתר. גלישה באתר ו/או שימוש בו מכל סוג, כמוהם כהסכמה לתנאי התקנון והתחייבות לפעול על פיהם.</p>
+        <ul class="list-disc list-inside space-y-1 mt-3 text-white/60">
+          <li>האמור בתקנון זה בלשון זכר הוא לשם הנוחות בלבד והתקנון מתייחס לבני שני המינים באופן שווה.</li>
+          <li>השירותים באמצעות האתר כפופים לתנאים המפורטים בתקנון זה.</li>
+          <li>עצם הזמנת שירותים באתר תהווה הצהרה מצד הלקוח כי קרא את הוראות תקנון זה, הבין אותן והסכים להן.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-headline font-bold text-white uppercase tracking-widest text-xs mb-3">השירותים</h3>
+        <ul class="list-disc list-inside space-y-1 text-white/60">
+          <li>האתר מאפשר שירותי אימוני MMA, ג'יו-ג'יטסו ברזילאי, מואי תאי, היאבקות, וכוח וסיבולת.</li>
+          <li>ניתן להזמין שירותים באמצעות יצירת קשר עם הנהלת האתר בהתאם לזמינותו ומיקומו הגיאוגרפי.</li>
+          <li>הנהלת האתר שומרת לעצמה את הזכות להפסיק את שירותיה בכל עת.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-headline font-bold text-white uppercase tracking-widest text-xs mb-3">ביטולים ושינוי סוגי השירותים</h3>
+        <ul class="list-disc list-inside space-y-1 text-white/60">
+          <li>מדיניות ביטול עסקה בהתאם לתקנות הגנת הצרכן (ביטול עסקה), התשע"א-2010 וחוק הגנת הצרכן, התשמ"א-1981.</li>
+          <li>ניתן לבטל שירות אשר נקבע עבור לקוח בכל עת, ובתנאי כי הלקוח יידע את הנהלת האתר לגבי ביטול או שינוי המועד לפחות כ-30 ימים קודם סיום ההתקשרות.</li>
+          <li>ביטול הזמנה יתאפשר עד 24 שעות ממועד ביצוע ההזמנה.</li>
+          <li>במקרה של ביטול שירותים, הלקוח לא יחוייב עבור השירות.</li>
+          <li>לא ניתן לקבל החזר כספי עבור שירותים אשר בוצעו.</li>
+          <li>האתר יהא רשאי לבטל אספקת הזמנה למשתמש בהתראה של שעתיים מראש לפחות.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-headline font-bold text-white uppercase tracking-widest text-xs mb-3">זמינות ומיקום אזורי</h3>
+        <ul class="list-disc list-inside space-y-1 text-white/60">
+          <li>זמינות השירותים כפופה למועד אשר נקבע עם הנהלת האתר.</li>
+          <li>בכל שאלה או בירור לגבי השירותים ניתן לחייג אל דניאל בטלפון 050-220-8046.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-headline font-bold text-white uppercase tracking-widest text-xs mb-3">אחריות ושירות</h3>
+        <ul class="list-disc list-inside space-y-1 text-white/60">
+          <li>השירותים ינתנו בהתאם לחבילות השירותים אשר יוצעו ע"י הנהלת האתר עם תחילת השירות.</li>
+          <li>אורך השירות הינו ע"פ מועד הזמן אשר נקבע מראש.</li>
+          <li>הנהלת האתר אינה אחראית על נזקים פיזיים ו/או כספיים ו/או כל נזק אחר הנגרמים במהלך השירות.</li>
+          <li>הנהלת האתר מסירה מעליה כל אחריות מהתכנים הנכתבים באתר או מהשימוש בהם והשלכותיהם.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-headline font-bold text-white uppercase tracking-widest text-xs mb-3">אבטחת מידע ופרטיות</h3>
+        <ul class="list-disc list-inside space-y-1 text-white/60">
+          <li>הנהלת האתר רשאית להשתמש במידע המופיע בטופס על מנת להביא לך את המידע והשירותים המבוקשים. מידע אישי זה לא ייחשף ולא ייעשה בו שימוש נוסף למטרות שיווקיות ללא רשות ולא יועבר לצד שלישי ללא אישור מפורש מהלקוח.</li>
+          <li>תוכן השירות וחשיפת מידע אישי במהלך השירות לעולם לא ייחשפו לאדם אחר ללא אישור בכתב מהלקוח.</li>
+          <li>החברה מתחייבת שלא לעשות שימוש במידע המסופק לה ע"י הקונים אלא על מנת לאפשר את הרכישה באתר ובהתאם לכל דין.</li>
+          <li>האתר מאובטח באמצעות שימוש באמצעי אבטחה מתקדמים. כל המשתמש באתר מתחייב כי לא יעשה כל פעילות שיש בה כדי לשבש את פעילות האתר.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-headline font-bold text-white uppercase tracking-widest text-xs mb-3">קניין רוחני</h3>
+        <ul class="list-disc list-inside space-y-1 text-white/60">
+          <li>כל זכויות הקניין הרוחני באתר זה, כולל זכויות יוצרים, סימני המסחר, ועיצוב האתר, הינן רכושה הבלעדי של הנהלת האתר.</li>
+          <li>אין להעתיק, לשכפל, להפיץ, לפרסם או להשתמש בכל דרך אחרת במידע כלשהו מהאתר, אלא אם ניתנה הסכמה לכך מראש ובכתב.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-headline font-bold text-white uppercase tracking-widest text-xs mb-3">יצירת קשר</h3>
+        <p>לכל שאלה ופנייה ניתן ליצור קשר עם הנהלת האתר בטלפון <span class="text-primary">050-220-8046</span> או במייל <span class="text-primary">daniel4mma@gmail.com</span>.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- ════ מדיניות פרטיות Modal ════ -->
 <div id="privacy-modal" class="hidden fixed inset-0 z-[999] flex items-center justify-center p-4" style="background:rgba(0,0,0,.85);backdrop-filter:blur(6px)">
   <div class="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto bg-[#131313]" style="border:1px solid rgba(255,255,255,.1)">
