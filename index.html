@@ -725,10 +725,10 @@
           <!-- ═══ אימונים אישיים ═══ -->
           <div class="pricing-slide flex-shrink-0 p-8 md:p-10 flex flex-col" style="background:#0e0e0e;border:1px solid rgba(255,255,255,.07)">
             <div class="font-headline font-bold text-[10px] tracking-[.4em] uppercase text-white/40 mb-6">אימונים אישיים</div>
-            <div class="font-headline font-black text-5xl text-white mb-1">₪180<span class="text-xl text-white/40">/אימון</span></div>
-            <div class="font-headline text-[10px] tracking-widest text-white/30 uppercase mb-1">אימון בודד</div>
-            <div class="font-headline font-black text-3xl text-white/70 mb-1">₪150<span class="text-lg text-white/30">/אימון</span></div>
-            <div class="font-headline text-[10px] tracking-widest text-white/30 uppercase mb-8">חבילת 10 אימונים</div>
+            <div class="font-headline font-black text-5xl text-white mb-1">₪150<span class="text-xl text-white/40">/אימון</span></div>
+            <div class="font-headline text-[10px] tracking-widest text-white/30 uppercase mb-1">חבילת 10 אימונים</div>
+            <div class="font-headline font-black text-3xl text-white/70 mb-1">₪180<span class="text-lg text-white/30">/אימון</span></div>
+            <div class="font-headline text-[10px] tracking-widest text-white/30 uppercase mb-8">אימון בודד</div>
             <div class="w-full mb-8" style="height:1px;background:rgba(255,255,255,.05)"></div>
             <ul class="space-y-5 font-body text-sm text-white/60 flex-1">
               <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-base">check</span>תוכנית אישית מותאמת</li>
@@ -746,8 +746,8 @@
       <!-- פקדים -->
       <div class="flex items-center justify-between mt-6">
         <div class="flex gap-2" id="pricing-dots">
-          <button onclick="pGoTo(0)" class="pricing-dot" style="width:32px;height:3px;background:#E21B1B;transition:all .3s"></button>
-          <button onclick="pGoTo(1)" class="pricing-dot" style="width:12px;height:3px;background:rgba(255,255,255,.2);transition:all .3s"></button>
+          <button onclick="pGoTo(0)" class="pricing-dot" style="width:12px;height:3px;background:rgba(255,255,255,.2);transition:all .3s"></button>
+          <button onclick="pGoTo(1)" class="pricing-dot" style="width:32px;height:3px;background:#E21B1B;transition:all .3s"></button>
           <button onclick="pGoTo(2)" class="pricing-dot" style="width:12px;height:3px;background:rgba(255,255,255,.2);transition:all .3s"></button>
         </div>
         <div class="flex gap-3">
@@ -774,7 +774,7 @@
       var wrap  = document.getElementById('pricing-wrap');
       var dots  = document.querySelectorAll('.pricing-dot');
       var total = 3;
-      var cur   = 0;
+      var cur   = 1;
       var startX= 0;
       var dragging = false;
 
@@ -813,6 +813,7 @@
       });
 
       window.addEventListener('resize', function(){ goTo(cur); });
+      window.addEventListener('load', function(){ goTo(1); });
     })();
     </script>
 
